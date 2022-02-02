@@ -5,6 +5,7 @@ def writeHadoopConfigFile(name,xml):
     f = open("/usr/local/hadoop/etc/hadoop/" + name,"w")
     f.write(xml)
     f.close()
+    print("Finished Config: " + xml)
 
 mf = open("manager","r")
 sf = open("workers","r")
@@ -13,7 +14,7 @@ sip = sf.read().replace("-","")
 mf.close()
 sf.close()
 
-print("Config Hadoop 2.9.2 YARN...")
+print("Config Hadoop 3.3.1 YARN...")
 mapredSiteXml = """<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
