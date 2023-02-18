@@ -11,7 +11,7 @@
 -input /Lab1/input/* -output /Lab1/output/
 
 /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
--file ../Lab1/mapper.py -mapper ../Lab1/mapper2.py \
+-file ../Lab1/mapper2.py -mapper ../Lab1/mapper2.py \
 -D mapred.reduce.tasks=0 \
 -input /Lab1/output/* -output /Lab1/output2/
 
