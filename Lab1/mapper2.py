@@ -21,4 +21,4 @@ for line in sys.stdin:
 
 for i in range(24):
     top_n = sorted(top[i], key=lambda v:v[1], reverse=True)[0:3]
-    print '%s\t%s' % (i, top_n)
+    print('%s\t%s' % (i, top_n))
