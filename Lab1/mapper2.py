@@ -11,7 +11,7 @@ for line in sys.stdin:
 	hr_ip, count = line
 	
 	hr, ip = hr_ip.split(']')
-	hr = hr[1:]
+	hr = hr[1:3]
 
 	try:
 		hr = int(hr)
