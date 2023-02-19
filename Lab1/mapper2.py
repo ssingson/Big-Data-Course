@@ -13,8 +13,8 @@ for line in sys.stdin:
 
 	try:
 		hr = int(hr)
-	    count = int(count)    
-	    top[hr].append([ip, count])
+		count = int(count)    
+		top[hr].append([ip, count])
 
 	except ValueError:
 		pass 
