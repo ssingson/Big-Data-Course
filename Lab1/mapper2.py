@@ -10,6 +10,9 @@ for line in sys.stdin:
 	line = line.strip().split('\t')
 	hr_ip, count = line
 	hr, ip = hr_ip.split(' ')
+	
+	hr, ip = hr_ip.split(']')
+	hr = hr[1:]
 
 	try:
 		hr = int(hr)
