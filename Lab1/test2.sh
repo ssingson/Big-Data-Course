@@ -4,5 +4,5 @@
 echo 'This is a test'
 read $test
 
-echo What is happening This is happening $test
+echo What is $test happening This is happening 
 ../stop.sh
