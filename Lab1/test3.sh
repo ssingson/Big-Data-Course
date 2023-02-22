@@ -13,6 +13,6 @@ declare -i lasttime=25
 #  echo 'What is the latest time you want?' 
 #  read lasttime
 
-echo 'This is a test!'
+echo $lasttime
 
 ../stop.sh
