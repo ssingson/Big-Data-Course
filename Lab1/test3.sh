@@ -1,5 +1,5 @@
 #!/bin/sh
-../start.sh
+#../start.sh
 
 #re='^[0-9]+$'
 
@@ -18,4 +18,4 @@ read lasttime
 
 echo $lasttime
 
-../stop.sh
+#../stop.sh
