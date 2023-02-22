@@ -16,7 +16,7 @@ for line in sys.stdin:
 
 print()
 print()
-print(1)
+print(sys.argv)
 print(2)
 print()
 sorted_dict_ip_count = sorted(dict_ip_count.items(), key=itemgetter(0))
