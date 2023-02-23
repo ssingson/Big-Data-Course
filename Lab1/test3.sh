@@ -26,6 +26,7 @@ do
 done
 
 #print earliest and latest time
-echo $firsttime $lasttime
-
+echo The top IPs will be between $firsttime:00 and $lasttime:00.
+echo 
+echo Test
 #../stop.sh
