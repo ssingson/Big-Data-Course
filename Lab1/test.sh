@@ -1,5 +1,6 @@
 #!/bin/sh
 ../start.sh
+#test test test
 /usr/local/hadoop/bin/hdfs dfs -rm -r /Lab1/input/
 /usr/local/hadoop/bin/hdfs dfs -rm -r /Lab1/output/
 /usr/local/hadoop/bin/hdfs dfs -rm -r /Lab1/output2/
