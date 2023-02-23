@@ -1,7 +1,6 @@
-from operator import itemgetter
-import sys
+#!/usr/bin/python
 
-dict_ip_count = {}
+import sys
 
 for line in sys.stdin:
   sys.stdout.write(line) 
