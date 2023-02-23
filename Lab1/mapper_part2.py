@@ -3,8 +3,8 @@
 import re
 import sys
 
-print(sysargv[1])
-print(sysargv[2])
+print(sys.sysargv[1])
+print(sys.sysargv[2])
 pat = re.compile('(?P<ip>\d+.\d+.\d+.\d+).*?\d{4}:(?P<hour>\d{2}):\d{2}.*? ')
 for line in sys.stdin:
     match = pat.search(line)
