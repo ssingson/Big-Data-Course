@@ -1,7 +1,6 @@
 #!/bin/sh
 #../start.sh
 
-#re='^[0-9]+$'
 
 #while ! [[ $yournumber =~ $re ]] || [$firsttime -gt 24] && [$firsttime -lt 0]:
 #  echo What is the earliest time you want? 
@@ -9,20 +8,27 @@
 #  if ! [[ $yournumber =~ $re ]] || [$firsttime -gt 24] && [$firsttime -lt 0]: 
 #    echo Please insert an integer between 0 and 24. 
 declare -i lasttime=25
-#while ! [[ $lasttime =~ $re ]] || (lasttime < 0) || (lasttime > 24)
 
-while ! [[ $lasttime =~ $re ]] || ((lasttime < 0)) || ((lasttime > 24))
+while ((firsttime < 0)) || ((firsttime > 24))
 do
-  echo 'What is the latest time you want?' 
+  echo 'What is the earliest hour you want?' 
   read lasttime
-  if ! [[ $lasttime =~ $re ]] || ((lasttime < 0)) || ((lasttime > 24))
+  if ((firsttime < 0)) || ((firsttime > 24))
   then
     echo 'Please insert an integer between 0 and 24.' 
   fi
 done
-#echo 'What is the latest time you want?' 
-#read lasttime
 
-echo $lasttime
+while ((lasttime < 0)) || ((lasttime > 24))
+do
+  echo 'What is the latest hour you want?' 
+  read lasttime
+  if ((lasttime < 0)) || ((lasttime > 24))
+  then
+    echo 'Please insert an integer between 0 and 24.' 
+  fi
+done
+
+echo $firsttime $lasttime
 
 #../stop.sh
