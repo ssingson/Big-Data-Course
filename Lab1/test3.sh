@@ -16,6 +16,7 @@ do
   echo 'What is the latest time you want?' 
   read lasttime
   if ! [[ $lasttime =~ $re ]] || ((lasttime < 0)) || ((lasttime > 24))
+  then
     echo 'Please insert an integer between 0 and 24.' 
   fi
 done
