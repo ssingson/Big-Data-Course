@@ -11,7 +11,7 @@
 declare -i lasttime=25
 #while ! [[ $lasttime =~ $re ]] || (lasttime < 0) || (lasttime > 24)
 
-while ((lasttime < 0)) || ((lasttime > 24))
+while ![[ $lasttime =~ $re ]] || ((lasttime < 0)) || ((lasttime > 24))
 do
   echo 'What is the latest time you want?' 
   read lasttime
