@@ -32,7 +32,6 @@ echo
 #print earliest and latest time
 echo The top IPs will be between $firsttime:00 and $lasttime:00.
 echo 
-echo Test
 
 /usr/local/hadoop/bin/hdfs dfs -rm -r /Lab1/input/
 /usr/local/hadoop/bin/hdfs dfs -rm -r /Lab1/output/
