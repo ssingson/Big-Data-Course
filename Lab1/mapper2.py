@@ -1,4 +1,4 @@
-#!usr/bin/python 
+#!/usr/bin/python 
 
 from operator import itemgetter
 from collections import defaultdict
