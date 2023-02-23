@@ -1,13 +1,5 @@
-#!/bin/sh
-#../start.sh
-
-
-#while ! [[ $yournumber =~ $re ]] || [$firsttime -gt 24] && [$firsttime -lt 0]:
-#  echo What is the earliest time you want? 
-#  read firsttime
-#  if ! [[ $yournumber =~ $re ]] || [$firsttime -gt 24] && [$firsttime -lt 0]: 
-#    echo Please insert an integer between 0 and 24. 
-declare -i lasttime=25
+# Set the earliest hour for the filter
+declare -i firsttime=25
 
 while ((firsttime < 0)) || ((firsttime > 24))
 do
@@ -19,6 +11,10 @@ do
   fi
 done
 
+# Set the latest hour for the filter
+declare -i lasttime=25
+
+
 while ((lasttime < 0)) || ((lasttime > 24))
 do
   echo 'What is the latest hour you want?' 
@@ -29,6 +25,7 @@ do
   fi
 done
 
+#print earliest and latest time
 echo $firsttime $lasttime
 
 #../stop.sh
