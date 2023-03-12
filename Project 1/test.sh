@@ -1,4 +1,4 @@
 #!/bin/sh
 
 python test.py
-echo $var1
+echo $MY_VARIABLE
