@@ -1,7 +1,8 @@
-import subprocess
+import os
 
-# set the variable in Python
-var1 = "hello world"
+# set the variable name and value
+variable_name = 'var'
+variable_value = 'some_value'
 
-# pass the variable to Bash using subprocess
-subprocess.run(["bash", "-c", f'export MY_VAR="{var1}"'])
+# set the environment variable
+os.environ[variable_name] = variable_value
