@@ -8,9 +8,7 @@ dict_streetcode1_sum = {}
 dict_streetcode2_sum = {}
 dict_streetcode3_sum = {}
 
-with open('data.log', 'w') as g: #this line change for submission
-  
-  for line in lines:
+for line in sys.stdin: #this line change for submission
     line = line.strip()
     group, streets = line.split('\t')
     group = int(group)
@@ -32,7 +30,5 @@ sorted_streetcode1_sum = sorted(dict_streetcode1_sum.items(), key=itemgetter(0))
 sorted_streetcode2_sum = sorted(dict_streetcode2_sum.items(), key=itemgetter(0))
 sorted_streetcode3_sum = sorted(dict_streetcode3_sum.items(), key=itemgetter(0))
 
-with open('data.log', 'w') as g:
-  for i in range(len(sorted_ticket_count)):
-    g.write(str((sorted_streetcode1_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode2_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode3_sum[i][1] / sorted_ticket_count[i][1])))
-    g.write('\n')
+for i in range(len(sorted_ticket_count)):
+    print(str((sorted_streetcode1_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode2_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode3_sum[i][1] / sorted_ticket_count[i][1])))
