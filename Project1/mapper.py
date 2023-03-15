@@ -4,7 +4,7 @@ import sys
 import random 
 import pandas as pd
 
-lines = [s.split(',') for s in lines]
+lines = [s.split(',') for s in sys.stdin]
 columns = lines[0].copy()
 columns.append('Extra Line')
 
