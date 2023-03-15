@@ -5,7 +5,7 @@ import random
 import pandas as pd
 
 lines = [s.split(',') for s in sys.stdin]
-columns = lines[0].copy()
+columns = lines[0]
 columns.append('Extra Line')
 
 df = pd.DataFrame(data = lines, columns = columns)
