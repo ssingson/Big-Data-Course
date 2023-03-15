@@ -8,11 +8,11 @@ dict_streetcode1_sum = {}
 dict_streetcode2_sum = {}
 dict_streetcode3_sum = {}
 
-for line in sys.stdin: #this line change for submission
+for line in sys.stdin: 
     line = line.strip()
     group, streets = line.split('\t')
     group = int(group)
-    streets = [int(x.strip(" '")) for x in streets.strip('()').split(',')]
+    streets = [int(x.strip(" '")) for x in streets.strip('(').strip(')').split(',')]
     try:
         group = int(group)
         dict_ticket_count[group] = dict_ticket_count.get(group, 0) + 1
