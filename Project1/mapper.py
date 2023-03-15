@@ -1,4 +1,4 @@
-#Map 1
+#!/usr/bin/python
 import re
 import sys
 import random 
