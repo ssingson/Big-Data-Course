@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # --*-- coding:utf-8 --*--
 
-pip install pandas
-
 import re
 import sys
 import random 
