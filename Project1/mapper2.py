@@ -7,7 +7,7 @@ import pandas as pd
 
 centroids = []
 
-for line in stdin[0]: 
+for line in sys.stdin[0]: 
     line = [float(x) for x in line.strip('(').strip('\n').strip(')').split(',')]
     centroids.append(line)
 
