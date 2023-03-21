@@ -3,6 +3,7 @@
 
 import re
 import sys
+import random
 
 n = 0
 for line in sys.stdin: 
