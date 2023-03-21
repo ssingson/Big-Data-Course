@@ -15,7 +15,7 @@
 -file reducer.py -reducer reducer.py \
 -input /input/* -output /output/
 
-/usr/local/hadoop/bin/hdfs dfs -cat /output2/part-00000
+/usr/local/hadoop/bin/hdfs dfs -cat /output/part-00000
 /usr/local/hadoop/bin/hdfs dfs -rm -r /input/
 /usr/local/hadoop/bin/hdfs dfs -rm -r /output/
 /usr/local/hadoop/bin/hdfs dfs -rm -r /output2/
