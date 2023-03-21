@@ -15,7 +15,6 @@
 -file reducer.py -reducer reducer.py \
 -input /input/* -output /output/
 
-/usr/local/hadoop/bin/hdfs dfs -copyFromLocal parking_sampled.csv /input/
 /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
 -file mapper2.py -mapper mapper2.py \
 -file reducer.py -reducer reducer.py \
