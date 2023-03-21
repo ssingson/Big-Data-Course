@@ -19,12 +19,12 @@ for line in sys.stdin[0]:
       try: 
         min_distance = float('inf')
         centroid = 0
+        line = line.strip().split(",")
         for i in range(len(centroids)): 
-          distance = abs(int(row['Street Code1']) - int(centroids[i][0])) + abs(int(row['Street Code2']) - int(centroids[i][1])) + abs(int(row['Street Code3']) - int(centroids[i][2]))
+          distance = abs(int(line[10] - int(centroids[i][0])) + abs(int(line[11] - int(centroids[i][1])) + abs(int(line[12] - int(centroids[i][2]))
           if distance < min_distance: 
             min_distance = distance
             centroid = i
-            line = line.strip().split(",")
-         print('%s\t%s' % (random.randint(1,3), '(' + line[10] + ',' + line[11] + ',' + line[12] + ')'))
+         print('%s\t%s' % (centroids[i], '(' + line[10] + ',' + line[11] + ',' + line[12] + ')'))
       except ValueError: 
          pass
