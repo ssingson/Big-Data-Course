@@ -17,7 +17,7 @@
 
 /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
 -file mapper2.py -mapper mapper2.py \
--file reducer.py -reducer reducer.py \
+-file reducer2.py -reducer reducer2.py \
 -input /input/* \
 -input /output/* \
 -inputformat org.apache.hadoop.mapred.TextInputFormat \
