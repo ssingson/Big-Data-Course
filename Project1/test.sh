@@ -9,7 +9,7 @@
 /usr/local/hadoop/bin/hdfs dfs -rm -r /output2/
 /usr/local/hadoop/bin/hdfs dfs -mkdir -p /input/
 
-/usr/local/hadoop/bin/hdfs dfs -copyFromLocal parking_sampled.csv /input/
+/usr/local/hadoop/bin/hdfs dfs curl -o /input/parking_violations.csv https://data.cityofnewyork.us/api/views/pvqr-7yc4/rows.csv?accessType=DOWNLOAD 
 /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
 -file mapper.py -mapper mapper.py 2000\
 -file reducer.py -reducer reducer.py \
