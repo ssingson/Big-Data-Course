@@ -22,13 +22,14 @@ import sys
 
 
 sorted_ticket_count = sorted(dict_ticket_count.items(), key=itemgetter(0))
+# saves the cluster early 
 sorted_streetcode1_sum = sorted(dict_streetcode1_sum.items(), key=itemgetter(0)) / sorted(dict_ticket_count.items(), key=itemgetter(0))
 sorted_streetcode2_sum = sorted(dict_streetcode2_sum.items(), key=itemgetter(0)) / sorted(dict_ticket_count.items(), key=itemgetter(0))
 sorted_streetcode3_sum = sorted(dict_streetcode3_sum.items(), key=itemgetter(0)) / sorted(dict_ticket_count.items(), key=itemgetter(0))
 
 
 cluster_distance = [] 
-
+#find the average distance of the cluster 
  for line in sys.stdin: 
       line = line.strip()
       group, streets = line.split('\t')
@@ -39,5 +40,6 @@ cluster_distance = []
       except ValueError:
           pass
 
+#returns centroid as the key and the average cluster distance
 for i in range(len(sorted_ticket_count)):
-  print(str((sorted_streetcode1_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode2_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode3_sum[i][1] / sorted_ticket_count[i][1])), )
+  print(str((sorted_streetcode1_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode2_sum[i][1] / sorted_ticket_count[i][1], sorted_streetcode3_sum[i][1] / sorted_ticket_count[i][1])), str(distance_streetcode1[i] / sorted_ticket_count[i]) )
