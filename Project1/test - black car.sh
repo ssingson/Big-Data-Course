@@ -33,7 +33,6 @@ do
   -output /output2/
 done 
 
-/usr/local/hadoop/bin/hdfs dfs -copyFromLocal parking_sampled.csv /input/
 /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
 -file mapper - black car.py -mapper mapper - black car.py\
 -file reducer - black car.py -reducer reducer - black car.py \
