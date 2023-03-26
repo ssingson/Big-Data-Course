@@ -27,7 +27,7 @@ for line in sys.stdin:
             centroid = 0
             line = line.strip().split(",")
             for i in range(len(centroids)): 
-              distance = abs(int(line[10] - int(centroids[i][0])) + abs(int(line[11] - int(centroids[i][1])) + abs(int(line[12] - int(centroids[i][2]))
+              distance = ((int(line[10] - int(centroids[i][0]))) ** 2 + (abs(int(line[11] - int(centroids[i][1]))) ** 2 + (abs(int(line[12] - int(centroids[i][2]))) ** 2) ** 0.5
               if distance < min_distance: 
                 min_distance = distance
                 centroid = i
