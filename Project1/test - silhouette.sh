@@ -1,10 +1,7 @@
 #!/bin/sh
 ../start.sh
 
-
-
-#test test test
-
+#Pushes k clusters into the program
 for k in [2,10,100,1000,2000, 5000, 10000,100000, 1000000]:
 
     /usr/local/hadoop/bin/hdfs dfs -rm -r /input/
@@ -14,8 +11,6 @@ for k in [2,10,100,1000,2000, 5000, 10000,100000, 1000000]:
 
     /usr/local/hadoop/bin/hdfs dfs curl -o /input/parking_violations.csv https://data.cityofnewyork.us/api/views/pvqr-7yc4/rows.csv?accessType=DOWNLOAD 
     /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
-    
-    #Pushes k clusters into the program
     -file mapper.py -mapper mapper.py k \
     -file reducer.py -reducer reducer.py \
     -input /input/* -output /input/output/ 
