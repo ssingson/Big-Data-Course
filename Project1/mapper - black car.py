@@ -15,14 +15,15 @@ for line in sys.stdin:
         line = [float(x) for x in line.strip('(').strip('\n').strip(')').split(',')]
         centroids.append(line)
     
-    
+
+#Only counts black cars
 n = 0
 for line in sys.stdin:
- #Only counts black cars
   if line[34] == 'BLK': 
     input_file = os.environ['map_input_file']
          if input_file.startswith('/input/'):
-           if n == 0:
+           # removes the column headers row
+            if n == 0:
               n += 1
            else:
               try: 
