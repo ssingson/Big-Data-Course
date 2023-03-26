@@ -24,7 +24,7 @@ do
   /usr/local/hadoop/bin/hdfs dfs -rm -r /output2/
   
   /usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar \
-  -file mapper2.py -mapper mapper2.py \
+  -file mapper2.py -mapper mapper2.py 2000\
   -file reducer2.py -reducer reducer2.py \
   -input /input/* \
   -input /output/* \
