@@ -18,81 +18,81 @@ if __name__ == "__main__":
     .appName("IncomeClassification")\
     .getOrCreate()
 
-#get column names 
-columns = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income']
+    #get column names 
+    columns = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income']
 
-#Pull training data 
-df_train=spark.read\
-  .format("csv")\
-  .option("inferSchema","true")\
-  .load(sys.argv[1], columns = columns)
+    #Pull training data 
+    df_train=spark.read\
+      .format("csv")\
+      .option("inferSchema","true")\
+      .load(sys.argv[1], columns = columns)
 
-#Clean data, have classifier column
-df_train = df_train.toDF(*columns)
+    #Clean data, have classifier column
+    df_train = df_train.toDF(*columns)
 
-df_train = df_train.withColumn("grade", \
-   when((df_train.income == ' <=50K'), 0) \
-     .otherwise(1) \
-  )
+    df_train = df_train.withColumn("grade", \
+       when((df_train.income == ' <=50K'), 0) \
+         .otherwise(1) \
+      )
 
-#Pull test data 
-df_test=spark.read\
-  .format("csv")\
-  .option("inferSchema","true")\
-  .load(sys.argv[2], columns = columns) 
+    #Pull test data 
+    df_test=spark.read\
+      .format("csv")\
+      .option("inferSchema","true")\
+      .load(sys.argv[2], columns = columns) 
 
-#Clean data, have classifier column
-df_test = df_test.toDF(*columns)
+    #Clean data, have classifier column
+    df_test = df_test.toDF(*columns)
 
-df_test = df_test.withColumn("grade", \
-   when((df_test.income == ' <=50K'), 0) \
-     .otherwise(1))
-  
-#For categorical features, have them in indexed list form instead
-indexer = StringIndexer()\
-    .setInputCols(['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])\
-    .setOutputCols(['workclass_index', 'education_index', 'marital-status_index', 'occupation_index', 'relationship_index', 'race_index', 'sex_index', 'native-country_index'])
+    df_test = df_test.withColumn("grade", \
+       when((df_test.income == ' <=50K'), 0) \
+         .otherwise(1))
 
-#For categorical features
-encoder = OneHotEncoder()\
-    .setInputCols(['workclass_index', 'education_index', 'marital-status_index', 'occupation_index', 'relationship_index', 'race_index', 'sex_index', 'native-country_index'])\
-    .setOutputCols(['workclass_encoded', 'education_encoded', 'marital-status_encoded', 'occupation_encoded', 'relationship_encoded', 'race_encoded', 'sex_encoded', 'native-country_encoded'])
+    #For categorical features, have them in indexed list form instead
+    indexer = StringIndexer()\
+        .setInputCols(['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country'])\
+        .setOutputCols(['workclass_index', 'education_index', 'marital-status_index', 'occupation_index', 'relationship_index', 'race_index', 'sex_index', 'native-country_index'])
 
-#Have all features in one vector to match format of MLLib
-assembler = VectorAssembler()\
-    .setInputCols(['age', 'workclass_encoded', 'fnlwgt', 'education_encoded', 'education-num', 'marital-status_encoded', 'occupation_encoded', 'relationship_encoded', 'race_encoded', 'sex_encoded', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country_encoded'])\
-    .setOutputCol('vectorized_features')
+    #For categorical features
+    encoder = OneHotEncoder()\
+        .setInputCols(['workclass_index', 'education_index', 'marital-status_index', 'occupation_index', 'relationship_index', 'race_index', 'sex_index', 'native-country_index'])\
+        .setOutputCols(['workclass_encoded', 'education_encoded', 'marital-status_encoded', 'occupation_encoded', 'relationship_encoded', 'race_encoded', 'sex_encoded', 'native-country_encoded'])
 
-#Have features scaled based on standard deviations from the feature's average to avoid bias from varying ranges
-scaler = StandardScaler()\
-        .setInputCol('vectorized_features')\
-        .setOutputCol('features')
+    #Have all features in one vector to match format of MLLib
+    assembler = VectorAssembler()\
+        .setInputCols(['age', 'workclass_encoded', 'fnlwgt', 'education_encoded', 'education-num', 'marital-status_encoded', 'occupation_encoded', 'relationship_encoded', 'race_encoded', 'sex_encoded', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country_encoded'])\
+        .setOutputCol('vectorized_features')
 
-#Pipeline the steps for data cleaning into one pipeline
-pipeline_stages = Pipeline()\
-    .setStages([indexer, encoder, assembler, scaler])
+    #Have features scaled based on standard deviations from the feature's average to avoid bias from varying ranges
+    scaler = StandardScaler()\
+            .setInputCol('vectorized_features')\
+            .setOutputCol('features')
 
-#Clean data in the training data, utilize same cleaning with the test data
-pipeline_model = pipeline_stages.fit(df_train)
-train = pipeline_model.transform(df_train)
-test = pipeline_model.transform(df_test)
+    #Pipeline the steps for data cleaning into one pipeline
+    pipeline_stages = Pipeline()\
+        .setStages([indexer, encoder, assembler, scaler])
 
-#Fit and transform the training and test data 
-rf = RandomForestClassifier(featuresCol = 'features', labelCol = 'grade')
-rfModel = rf.fit(train)
-predictions = rfModel.transform(test)
+    #Clean data in the training data, utilize same cleaning with the test data
+    pipeline_model = pipeline_stages.fit(df_train)
+    train = pipeline_model.transform(df_train)
+    test = pipeline_model.transform(df_test)
 
-#Compute and print the accuracy
-accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
-print("The accuracy of the dataset using a Random Forest Classifier is %s." % accuracy)
+    #Fit and transform the training and test data 
+    rf = RandomForestClassifier(featuresCol = 'features', labelCol = 'grade')
+    rfModel = rf.fit(train)
+    predictions = rfModel.transform(test)
 
-#Fit and transform the training and test data 
-dt = DecisionTreeClassifier(featuresCol = 'features', labelCol = 'grade')
-dtModel = dt.fit(train)
-predictions = dtModel.transform(test)
+    #Compute and print the accuracy
+    accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
+    print("The accuracy of the dataset using a Random Forest Classifier is %s." % accuracy)
 
-#Compute and print the accuracy
-accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
-print("The accuracy of the dataset using a Decision Tree Classifier is %s." % accuracy)
+    #Fit and transform the training and test data 
+    dt = DecisionTreeClassifier(featuresCol = 'features', labelCol = 'grade')
+    dtModel = dt.fit(train)
+    predictions = dtModel.transform(test)
 
-spark.stop()
+    #Compute and print the accuracy
+    accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
+    print("The accuracy of the dataset using a Decision Tree Classifier is %s." % accuracy)
+
+    spark.stop()
