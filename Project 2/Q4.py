@@ -19,7 +19,7 @@ columns = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-
 df_train=spark.read\
   .format("csv")\
   .option("inferSchema","true")\
-  .load('/content/adult (1).data', columns = columns) #*****changing this line to sys.argv[1]
+  .load(sys.argv[1], columns = columns)
 
 #Clean data, have classifier column
 df_train = df_train.toDF(*columns)
@@ -33,7 +33,7 @@ df_train = df_train.withColumn("grade", \
 df_test=spark.read\
   .format("csv")\
   .option("inferSchema","true")\
-  .load('/content/adult (1).test', columns = columns) #*****changing this line to sys.argv[1]
+  .load(sys.argv[2], columns = columns) 
 
 #Clean data, have classifier column
 df_test = df_test.toDF(*columns)
