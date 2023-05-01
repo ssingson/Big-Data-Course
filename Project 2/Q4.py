@@ -13,6 +13,10 @@ from pyspark.ml.linalg import Vector
 from pyspark.ml.feature import VectorAssembler, StringIndexer, OneHotEncoder, StandardScaler
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: sort <file>", file=sys.stderr) 
+        sys.exit(-1)
+    
     spark = SparkSession\
             .builder\
             .appName("IncomeClassification")\
@@ -25,7 +29,7 @@ if __name__ == "__main__":
     df_train=spark.read\
             .format("csv")\
             .option("inferSchema","true")\
-            .load(sys.argv[1], columns = columns)
+            .load("/P2/Part4/input/train.csv", columns = columns)
 
     #Clean data, have classifier column
     df_train = df_train.toDF(*columns)
@@ -39,7 +43,7 @@ if __name__ == "__main__":
     df_test=spark.read\
             .format("csv")\
             .option("inferSchema","true")\
-            .load(sys.argv[2], columns = columns)
+            .load("/P2/Part4/input/test.csv", columns = columns)
 
     #Clean data, have classifier column
     df_test = df_test.toDF(*columns)
