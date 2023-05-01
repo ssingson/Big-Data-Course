@@ -15,7 +15,7 @@ from pyspark.ml.feature import VectorAssembler, StringIndexer, OneHotEncoder, St
 if __name__ == "__main__":
   spark = SparkSession\
     .builder\
-    .appName("NBAKMeans")\
+    .appName("IncomeClassification")\
     .getOrCreate()
 
   
