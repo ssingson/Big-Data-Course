@@ -12,6 +12,13 @@ from pyspark.mllib.evaluation import MultilabelMetrics, BinaryClassificationMetr
 from pyspark.ml.linalg import Vector
 from pyspark.ml.feature import VectorAssembler, StringIndexer, OneHotEncoder, StandardScaler
 
+if __name__ == "__main__":
+  spark = SparkSession\
+    .builder\
+    .appName("NBAKMeans")\
+    .getOrCreate()
+
+  
 #get column names 
 columns = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income']
 
