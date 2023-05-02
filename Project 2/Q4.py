@@ -14,9 +14,9 @@ from pyspark.ml.feature import VectorAssembler, StringIndexer, OneHotEncoder, St
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: sort <file>", file=sys.stderr) 
+        print("Usage: sort <file>", file=sys.stderr)
         sys.exit(-1)
-    
+
     spark = SparkSession\
             .builder\
             .appName("IncomeClassification")\
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     df_train=spark.read\
             .format("csv")\
             .option("inferSchema","true")\
-            .load("/P2/Part4/input/train.csv", columns = columns)
+            .load("/P2/Part4/input/training.csv", columns = columns)
 
     #Clean data, have classifier column
     df_train = df_train.toDF(*columns)
