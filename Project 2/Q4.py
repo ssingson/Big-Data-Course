@@ -87,8 +87,7 @@ if __name__ == "__main__":
     predictions = rfModel.transform(test)
 
     #Compute and print the accuracy
-    accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
-    print("The accuracy of the dataset using a Random Forest Classifier is %s." % accuracy)
+    rfaccuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
 
     #Fit and transform the training and test data
     dt = DecisionTreeClassifier(featuresCol = 'features', labelCol = 'grade')
@@ -96,7 +95,10 @@ if __name__ == "__main__":
     predictions = dtModel.transform(test)
 
     #Compute and print the accuracy
-    accuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
-    print("The accuracy of the dataset using a Decision Tree Classifier is %s." % accuracy)
+    dtaccuracy = predictions.filter(predictions.grade == predictions.prediction).count() / float(predictions.count())
+
+    #Print out accuracy for both models. 
+    print("The accuracy of the dataset using a Random Forest Classifier is %s." % rfaccuracy)
+    print("The accuracy of the dataset using a Decision Tree Classifier is %s." % dtaccuracy)
 
     spark.stop()
